@@ -21,7 +21,9 @@ $ ->
       dataType: 'json'
       done: (e, data) ->
         $.each data.files, (index, file) ->
-          text = '![' + file.name + '](' + '<%= asset_path('/').sub(/\/$/, "") %>' + data.result.image_url + ')'
+ 	  judge = ''
+          judge = '!' if file.name.match(/.*\.(png)|(jpg)|(jpeg)|(gif)|(PNG)|(JPG)|(JPEG)|(GIF)/)
+          text = judge + '[' + file.name + '](' + '<%= asset_path('/').sub(/\/$/, "") %>' + data.result.image_url + ')'
           insertAtCaret(e.target, text)
       error: (e) =>
         alert JSON.parse(e.responseText).image
